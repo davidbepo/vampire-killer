@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be196102213e53940a254b08a2669a13, type: 3}
+  m_Name: StateKnockBack
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: be697dd4096aadf4fa6847edc7af96a2, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 2f9ea52d1acf2435e8130f8b43ef669d, type: 2}
+    trueState: {fileID: 11400000, guid: bd1a5346b5835d344b97c47fbc2bd6fd, type: 2}
+    falseState: {fileID: 11400000}
+  - decision: {fileID: 11400000, guid: cda7488943f74a749b61cec2398b80a7, type: 2}
+    trueState: {fileID: 11400000}
+    falseState: {fileID: 11400000, guid: c58ff162d34ba374aa008f562307c763, type: 2}

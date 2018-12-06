@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Werewolf
+  - Human
+  - spikes
+  - Enemy
+  - PlayerWolf
+  - Ground
+  - BossDoor
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: First
+    uniqueID: 434033781
+    locked: 0
+  - name: Second
+    uniqueID: 359288959
+    locked: 0
+  - name: Third
+    uniqueID: 3199274491
+    locked: 0
+  - name: fourth
+    uniqueID: 3850327839
+    locked: 0
