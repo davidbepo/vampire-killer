@@ -68,7 +68,7 @@ public class scriptwerewolf : MonoBehaviour {
         checkJumpingAnimation();
         //regeneracion en modo hombre lobo
         if(gameController.instance.currentHealth < 100) {
-			if (contador >= 0.5f) { 
+			if (contador >= 0.2f) { 
 				gameController.instance.currentHealth += regeneracion;
 				contador = 0f;
 			}
@@ -87,8 +87,8 @@ public class scriptwerewolf : MonoBehaviour {
 				transform.position += Vector3.left * va * Time.deltaTime;
 				if(Input.GetKey(KeyCode.LeftAlt)) {
 					isMoving = 2;
-					animator.SetBool("move", false);
 					animator.SetBool("run", true);
+					animator.SetBool("move", false);
 					transform.position += Vector3.left * vc * Time.deltaTime;
 				}
 			}
@@ -105,8 +105,8 @@ public class scriptwerewolf : MonoBehaviour {
 				transform.position += Vector3.right * va * Time.deltaTime;
 				if(Input.GetKey(KeyCode.LeftAlt)) {
 					isMoving = 2;
-					animator.SetBool("move", false);
 					animator.SetBool("run", true);
+					animator.SetBool("move", false);
 					transform.position += Vector3.right * vc * Time.deltaTime;
 				}
 			}

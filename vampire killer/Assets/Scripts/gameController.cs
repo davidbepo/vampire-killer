@@ -10,6 +10,12 @@ public class gameController : MonoBehaviour {
     [SerializeField] public float currentHealth;
     [SerializeField] float startingFury;
     [SerializeField] float currentFury;
+    [SerializeField] GameObject bossDoor;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject playerWolf;
+    [SerializeField] Animator anim_HToW;
+    [SerializeField] Animator anim_WToH;
+    [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject canvas;
     [SerializeField] GameObject tgameover;
     [SerializeField] GameObject ttransform;
@@ -21,6 +27,7 @@ public class gameController : MonoBehaviour {
     [SerializeField] int startingAmmo;
     [SerializeField] GameObject patrolPoints;
     [SerializeField] GameObject enemy;
+    [SerializeField] float tiempolobo;
     int currentAmmo;
     private bool hasKey;
     int keysRecollected;
@@ -38,11 +45,7 @@ public class gameController : MonoBehaviour {
             hasKey = value;
         }
     }
-    [SerializeField] GameObject bossDoor;
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject playerWolf;
-    [SerializeField] Animator anim_HToW;
-    [SerializeField] GameObject mainCamera;
+
     
     bool isDead = false;
     private float contador = 0f;
@@ -80,8 +83,8 @@ public class gameController : MonoBehaviour {
     void Update () {
 		if (player.activeSelf) {
 			contador += Time.deltaTime;
-			if (contador >= 1f) { 
-				increaseFury(5);
+			if (contador >= 0.2f) { 
+				increaseFury(1);
 				contador = 0f;
 			}
 		}
@@ -198,7 +201,9 @@ public class gameController : MonoBehaviour {
 
     IEnumerator wolfMode() {
         activateWolf();
-        yield return new WaitForSecondsRealtime(20f);
+        yield return new WaitForSecondsRealtime(tiempolobo - 1f);
+        anim_WToH.SetFloat("Fury", -1);
+        yield return new WaitForSecondsRealtime(1f);
         currentFury = 0f;
         desactivateWolf();
     }

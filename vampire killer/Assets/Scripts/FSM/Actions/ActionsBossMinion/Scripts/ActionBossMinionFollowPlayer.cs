@@ -6,17 +6,13 @@ using UnityEngine;
 public class ActionBossMinionFollowPlayer : Action {
 
 
-    public override void Act(StateController controller)
-    {
+    public override void Act(StateController controller) {
         if (controller != null)
-        {
             followPlayer(controller);
-        }
     }
 
 
-    void followPlayer(StateController controller)
-    {
+    void followPlayer(StateController controller) {
         Debug.Log(controller.ToString());
             float directionx = Mathf.Sign(controller.enemyStats.Player.transform.position.x - controller.transform.position.x);
             float directiony = Mathf.Sign(controller.enemyStats.Player.transform.position.y - controller.transform.position.y);

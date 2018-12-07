@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class sEnemyHitbox : MonoBehaviour {
 
-    // Use this for initialization
     private float damage;
-    public float Damage
-    {
-        set
-        {
+    public float Damage {
+        set {
             damage = value;
         }
     }
+    
 	void Start () {
 		
 	}
@@ -22,38 +20,27 @@ public class sEnemyHitbox : MonoBehaviour {
 		
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other != null)
-        {
-            if(other.gameObject.CompareTag("Player")){
-                Debug.Log("Damage player for " + damage);
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other != null) {
+            if(other.gameObject.CompareTag("Player")) {
                 //Direccion en la que va a ser empujado el jugador
                 Vector2 direction = checkDirection(other);
                 other.gameObject.GetComponent<Player>().knockBack(direction);
                 gameController.instance.takeDamage(damage);
-            }else if (other.gameObject.CompareTag("PlayerWolf"))
-            {
+            } else if (other.gameObject.CompareTag("PlayerWolf")) {
                 //Direccion en la que va a ser empujado el enemigo
                 Vector2 direction = checkDirection(other);
                 //Si el jugador esta en forma de hombrelobo el enemigo es empujado
                 this.transform.parent.gameObject.GetComponent<Enemy>().KnockBack(direction);
+                gameController.instance.takeDamage(damage/2);
             }
-            
         }
     }
 
-    Vector2 checkDirection(Collider2D other)
-    {
-        Vector2 direction;
+    Vector2 checkDirection(Collider2D other) {
         if (this.transform.parent.position.x > other.gameObject.transform.position.x)
-        {
-            direction = Vector2.left;
-        }
+            return Vector2.left;
         else
-        {
-            direction = Vector2.right;
-        }
-        return direction;
+            return Vector2.right;
     }
 }

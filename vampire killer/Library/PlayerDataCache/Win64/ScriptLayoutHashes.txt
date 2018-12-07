@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-/home/david/unity/beta 0.9/Vampire.exe
+/home/david/unity/beta 0.9.5/Vampire Killer.exe
 SceneListBegin?
 Assets/Scenes/Menu.unity
 Assets/Scenes/Escena_1.unity
@@ -136,7 +136,7 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 98d69a140ec0084cde3b6a5e09aea295 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
-f7f2286589290c4751b6a7826d7c4e3b Assembly-CSharp.dll:.gameController
+0ccd5f880b454d019a0bfcb7d0d5c867 Assembly-CSharp.dll:.gameController
 19add87542f82075f68cf3197d884645 Assembly-CSharp.dll:.SpawnEnemy
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 f0dbeb14eb23d555855f76f5b2313e40 Assembly-CSharp.dll:.EnemyBoss
