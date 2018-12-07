@@ -9,8 +9,8 @@ public class scriptwerewolf : MonoBehaviour {
     [SerializeField] GameObject collattack;
     Rigidbody2D rb;
 	
-	float va = 3f;
-	float vc = 5f;
+	[SerializeField] float velandar;
+	[SerializeField] float velcorrer;
 	private float contador = 0f;
 	
 	bool isDoingAction;
@@ -84,15 +84,19 @@ public class scriptwerewolf : MonoBehaviour {
 					animator.SetBool("move", true);
 				isMoving = 1;
 				transform.localRotation = Quaternion.Euler(0, 180, 0);
-				transform.position += Vector3.left * va * Time.deltaTime;
+				if(onGround())
+					transform.position += Vector3.left * velandar * Time.deltaTime;
+				else
+					transform.position += Vector3.left * velandar/2 * Time.deltaTime;
 				if(Input.GetKey(KeyCode.LeftAlt)) {
 					isMoving = 2;
 					animator.SetBool("run", true);
-					animator.SetBool("move", false);
-					transform.position += Vector3.left * vc * Time.deltaTime;
+					if(onGround())
+						transform.position += Vector3.left * velcorrer * Time.deltaTime;
+					
 				}
 			}
-		} else if(!(Input.GetKey(KeyCode.RightArrow))){
+		} else if(!(Input.GetKey(KeyCode.RightArrow))) {
 			animator.SetBool("move", false);
 			isMoving = 0;
 		}
@@ -102,12 +106,15 @@ public class scriptwerewolf : MonoBehaviour {
 					animator.SetBool("move", true);
 				isMoving = 1;
 				transform.localRotation = Quaternion.Euler(0, 0, 0);
-				transform.position += Vector3.right * va * Time.deltaTime;
+				if(onGround())
+					transform.position += Vector3.right * velandar * Time.deltaTime;
+				else
+					transform.position += Vector3.right * velandar/2 * Time.deltaTime;
 				if(Input.GetKey(KeyCode.LeftAlt)) {
 					isMoving = 2;
 					animator.SetBool("run", true);
-					animator.SetBool("move", false);
-					transform.position += Vector3.right * vc * Time.deltaTime;
+					if(onGround())
+						transform.position += Vector3.right * velcorrer * Time.deltaTime;
 				}
 			}
 		} else if(!(Input.GetKey(KeyCode.LeftArrow))) {
@@ -122,12 +129,12 @@ public class scriptwerewolf : MonoBehaviour {
 		/*if(Input.GetKey(KeyCode.W)) {
 			//ataque fuerte
 		}*/
-		if(Input.GetKey(KeyCode.E)) {
+		if(Input.GetKeyDown(KeyCode.E)) {
 			//ataque especial
 			if(!isDoingAction && isMoving == 0)
 				StartCoroutine(special());
 		}
-		if((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))&&onGround()) {
+		if((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && onGround()) {
 			if(!isDoingAction) {
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 animator.SetBool("isJumping", true);

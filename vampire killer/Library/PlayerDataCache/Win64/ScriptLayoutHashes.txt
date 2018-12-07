@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-/home/david/unity/beta 0.9.5/Vampire Killer.exe
+/home/david/unity/rc 0.98/Vampire Killer.exe
 SceneListBegin?
 Assets/Scenes/Menu.unity
 Assets/Scenes/Escena_1.unity
@@ -182,7 +182,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
-7a828a6c52538aca063b647b719b584a Assembly-CSharp.dll:.scriptwerewolf
+02bc954f7b65cef25ff86ee0cc2e15a1 Assembly-CSharp.dll:.scriptwerewolf
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 486cd95c82d8305219c352c06b776e1f UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule

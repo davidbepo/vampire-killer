@@ -8,9 +8,8 @@ public class Player : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	private float distToGround;
-	private float moveHorizontal;
 	private bool isAttacking;
-    private IEnumerator coroutine;
+	private bool moviendose;
 	//Hitbox
 	[SerializeField] GameObject attackRight;
 	[SerializeField] LayerMask groundLayer;
@@ -21,10 +20,7 @@ public class Player : MonoBehaviour {
     [SerializeField] Animator animator;
 	//[SerializeField] GameObject gamecontroller;
     [SerializeField] float damage;
-
-    //true = right  : false = left
-    bool facing;
-    Vector2 facingDirection = Vector2.right;
+    private bool direccion = true;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
@@ -35,25 +31,34 @@ public class Player : MonoBehaviour {
     void Update() {
 
         checkJumpingAnimation();
-        moveHorizontal = Input.GetAxis("Horizontal");
-        if (moveHorizontal != 0 && !isAttacking)
-            animator.SetBool("Walking", true);
-        else
-            animator.SetBool("Walking", false);
+        
 
 		if(!isAttacking) {
-	        if (moveHorizontal > 0 && facingDirection.Equals(Vector2.left))
-	            flip();
-	        else if (moveHorizontal < 0 && facingDirection.Equals(Vector2.right))
-	            flip();
-	
-			if(onGround())
-		        rb.transform.position = new Vector2(rb.transform.position.x + moveHorizontal * speed * Time.deltaTime, rb.transform.position.y);
-			else {
-				float velocityx = rb.velocity.x + (moveHorizontal * speed *Time.deltaTime);
-				rb.velocity = new Vector2(Mathf.Clamp(velocityx, -10f, 10f), rb.velocity.y );
+	        if(Input.GetKey(KeyCode.RightArrow)) {
+				direccion = true;
+				moviendose = true;
+				transform.localRotation = Quaternion.Euler(0, 0, 0);
+				if(onGround())
+					transform.position += Vector3.right * speed * Time.deltaTime;
+				else
+					transform.position += Vector3.right * speed/2 * Time.deltaTime;
 			}
-		
+	        if(Input.GetKey(KeyCode.LeftArrow)) {
+				direccion = false;
+				moviendose = true;
+				transform.localRotation = Quaternion.Euler(0, 180, 0);
+				if(onGround())
+					transform.position += Vector3.left * speed * Time.deltaTime;
+				else
+					transform.position += Vector3.left * speed/2 * Time.deltaTime;
+			}
+			if(! Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+				moviendose = false;
+			
+	        if (moviendose && !isAttacking)
+	            animator.SetBool("Walking", true);
+	        else
+	            animator.SetBool("Walking", false);
 		    if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && onGround()) {
 				rb.AddForce(Vector2.up  * jumpForce, ForceMode2D.Impulse);
 				animator.SetBool("isJumping", true);
@@ -63,9 +68,9 @@ public class Player : MonoBehaviour {
 				lightAttack();
 			}
 			
-			if(Input.GetKeyDown(KeyCode.E)&&!isAttacking&&gameController.instance.hasAmmo()) {
+			if(Input.GetKeyDown(KeyCode.E) && !isAttacking&&gameController.instance.hasAmmo()) {
 				shoot();
-					gameController.instance.reduceAmmo();
+				gameController.instance.reduceAmmo();
 			}
 			
 			/*if(Input.GetKeyDown(KeyCode.R)) {
@@ -80,7 +85,6 @@ public class Player : MonoBehaviour {
 		}	
 		
 	}
-	
 
 	//Comprueba si el jugador se encuentra sobre tierra
 	bool onGround() {
@@ -103,17 +107,14 @@ public class Player : MonoBehaviour {
 	}
 
 	void shoot() {
-            coroutine = shootCoroutine(0.6f);
-            StartCoroutine(coroutine);
+            StartCoroutine(shootCoroutine(0.6f));
             animator.SetBool("Shoot", true);
 	}
 	
 	void lightAttack() {
-		coroutine = attackCooldown(0.6f);
-		StartCoroutine(coroutine);
+		StartCoroutine(attackCooldown(0.6f));
         animator.SetBool("Attack", true);
         attackRight.GetComponent<PlayerAttack>().setDamage(damage);
-        attackRight.GetComponent<PlayerAttack>().setDirection(facingDirection);
         attackRight.SetActive(true);
     }
 	
@@ -129,13 +130,11 @@ public class Player : MonoBehaviour {
 	//Empuja al jugador en la direccion pasada como parametro
     public void knockBack(Vector2 direction) {
         if(direction == Vector2.up) {
-            coroutine = attackCooldown(0.5f);
-            StartCoroutine(coroutine);
+            StartCoroutine(attackCooldown(0.5f));
             rb.AddForce(new Vector2(Mathf.Floor(Random.Range(-10f,10f)), 5f), ForceMode2D.Impulse);
         }
         else if (!isAttacking) {
-            coroutine = attackCooldown(0.2f);
-            StartCoroutine(coroutine);
+            StartCoroutine(attackCooldown(0.2f));
             rb.AddForce(new Vector2(200f*direction.x, 0f), ForceMode2D.Force);
             /*if (facing)
             {
@@ -146,14 +145,6 @@ public class Player : MonoBehaviour {
                 rb.AddForce(new Vector2(200f, 0f), ForceMode2D.Force);
             }*/
         }
-    }
-
-    //Cambia la orientacion del sprite 
-    void flip() {
-        facingDirection = -facingDirection;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
     }
     
 	IEnumerator attackCooldown(float time) {
@@ -168,10 +159,14 @@ public class Player : MonoBehaviour {
         isAttacking = true;
         yield return new WaitForSecondsRealtime(time);
         isAttacking = false;
-        float sign = facingDirection.x;
-        Vector2 projectileVector = new Vector2(transform.position.x + 1.5f * sign, transform.position.y + 0.7f);
+        Vector2 projectileVector = new Vector2(transform.position.x + 1.5f, transform.position.y + 0.5f);
+        if(!direccion)
+			projectileVector = new Vector2(transform.position.x - 1.5f, transform.position.y + 0.5f);
         GameObject clone = Instantiate(projectile, projectileVector, transform.rotation);
-        clone.GetComponent<Rigidbody2D>().velocity = new Vector2(sign>0 ? projectilespeed : -projectilespeed, 0f);
+        if(direccion)
+			clone.GetComponent<Rigidbody2D>().velocity = new Vector2(projectilespeed, 0f);
+		else
+			clone.GetComponent<Rigidbody2D>().velocity = new Vector2(-projectilespeed, 0f);
         animator.SetBool("Shoot", false);
     }
 
