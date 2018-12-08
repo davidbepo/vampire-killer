@@ -112,7 +112,7 @@ public class Player : MonoBehaviour {
 	}
 	
 	void lightAttack() {
-		StartCoroutine(attackCooldown(0.6f));
+		StartCoroutine(attackCooldown(0.7f));
         animator.SetBool("Attack", true);
         attackRight.GetComponent<PlayerAttack>().setDamage(damage);
         attackRight.SetActive(true);

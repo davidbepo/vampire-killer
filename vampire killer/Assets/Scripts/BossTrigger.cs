@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BossTrigger : MonoBehaviour {
 
-
     [SerializeField] GameObject boss;
     [SerializeField] GameObject goCamera;
     Camera camera;
@@ -14,8 +13,7 @@ public class BossTrigger : MonoBehaviour {
         camera = goCamera.GetComponent<Camera>();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
+    void OnTriggerEnter2D(Collider2D other) {
         if (other != null) {
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("PlayerWolf")) {
                 boss.SetActive(true);

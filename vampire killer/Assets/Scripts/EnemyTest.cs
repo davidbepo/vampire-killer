@@ -20,8 +20,7 @@ public class EnemyTest : Enemy {
         if (health <= 0 && !isDead) {
             GetComponent<Animator>().SetTrigger("Death");
             Destroy(GetComponent<StateController>());
-            coroutine = death();
-            StartCoroutine(coroutine);
+            StartCoroutine(death());
             isDead = true;
             gameController.instance.increaseAmmo(1);
         }
