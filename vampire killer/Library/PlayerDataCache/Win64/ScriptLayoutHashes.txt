@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-/home/david/unity/rc 0.99/Vampire Killer.exe
+/home/david/unity/1.0/Vampire Killer.exe
 SceneListBegin?
 Assets/Scenes/Menu.unity
 Assets/Scenes/Escena_1.unity

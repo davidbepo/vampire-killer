@@ -14,11 +14,14 @@ public class sBossProjectile : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D other) {
         if (other != null) {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player")) {
                 gameController.instance.takeDamage(50f);
-            if (other.gameObject.CompareTag("PlayerWolf"))
+                Destroy(gameObject);
+			}
+            if (other.gameObject.CompareTag("PlayerWolf")) {
                 gameController.instance.takeDamage(20f);
-            else if (other.gameObject.CompareTag("Ground"))
+                Destroy(gameObject);
+			} else if (other.gameObject.CompareTag("Ground"))
                 Destroy(gameObject);
         }
     }
