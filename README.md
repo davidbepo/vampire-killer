@@ -1,4 +1,4 @@
-# vampire-killer
+# vampire killer
 juego desarrollado para DAM por:
 
 David Becerra Porres
